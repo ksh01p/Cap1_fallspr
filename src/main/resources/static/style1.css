@@ -1,0 +1,112 @@
+/* Global font import (Google Fonts: Poppins for modern look) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* Apply global styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: white; /* Change background to white */
+    color: #333;
+    margin: 0;
+    padding: 40px;
+    width: 50%;
+    text-align: center;
+    line-height: 1.8;
+    font-size: 20pt;
+}
+
+/* Style for container */
+#div_id {
+    background-color: white; /* Same background as the page */
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 40pt; /* Increased font size for 'Q&A 게시판' */
+    color: #003366; /* Navy blue color */
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group-inline {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.form-group-inline label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.form-group-inline input {
+    flex: 2; /* Increase width slightly */
+    padding: 12px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: border-color 0.3s ease;
+}
+
+/* Styling for title, content, and other inputs */
+input[type="text"], input[type="number"], textarea {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    background-color: #f9f9f9; /* Highlight the input fields */
+}
+
+/* Placeholder styles for title and content inputs */
+input[type="text"]::placeholder, input[type="number"]::placeholder, textarea::placeholder {
+    color: #999; /* Light gray placeholder */
+}
+
+/* Larger input for '내용' */
+.large-input {
+    width: 100%;
+    height: 200px; /* Increase height */
+    background-color: #f9f9f9; /* Highlight the content input */
+}
+
+/* Focus effect for input fields */
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+    border-color: #003366; /* Navy blue border on focus */
+    outline: none;
+    background-color: #eef6fc; /* Subtle background change on focus */
+}
+
+/* Button styles */
+button {
+    background-color: #003366; /* Navy blue for button */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+    margin-top: 20px; /* Spacing at the top for buttons */
+}
+
+button:hover {
+    background-color: #002244; /* Darker navy blue on hover */
+}
+
+/* Secondary button style */
+button:nth-of-type(2) {
+    background-color: #6c757d; /* Gray for secondary button */
+}
+
+button:nth-of-type(2):hover {
+    background-color: #5a6268; /* Darker gray on hover */
+}
