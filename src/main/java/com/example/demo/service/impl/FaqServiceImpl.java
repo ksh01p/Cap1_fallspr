@@ -1,7 +1,9 @@
 package com.example.demo.service.impl;
 import com.example.demo.domain.Faq;
+import com.example.demo.domain.User;
 import com.example.demo.dto.FaqDto;
 import com.example.demo.repository.FaqRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.FaqService;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +15,14 @@ import java.util.Map;
 public class FaqServiceImpl implements FaqService {
 
     private final FaqRepository faqRepository;
+    private final UserRepository userRepository;
     public FaqServiceImpl(
             FaqRepository faqRepository
+            , UserRepository userRepository
+
     ) {
         this.faqRepository = faqRepository;
+        this.userRepository = userRepository;
     }
 
     /**/
@@ -55,6 +61,18 @@ public class FaqServiceImpl implements FaqService {
         res.setId(faq.getId());
         res.setTitle(faq.getTitle());
         res.setContent(faq.getContent());
+        res.setUserId(faq.getUserId());
+
+        Long userId = faq.getUserId();
+        try{
+            User user = userRepository.findById(userId).orElseThrow(()-> new RuntimeException(""));
+            res.setUserUsername(user.getUsername());
+
+        }catch (Exception e){
+
+        }
+
+
         return res;
     }
 

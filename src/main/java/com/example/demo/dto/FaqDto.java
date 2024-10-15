@@ -11,10 +11,11 @@ public class FaqDto {
     public static class CreateReqDto {
         private String title;
         private String content;
+        private Long userId;
 
         public Faq toEntity(){
 
-            return Faq.of(getTitle(), getContent());
+            return Faq.of(getUserId(),getTitle(), getContent());
         }
     }
     @Setter
@@ -28,6 +29,7 @@ public class FaqDto {
     @Setter
     @Getter
     public static class CreateResDto {
+//        private Long userId;
         private Long id;
     }
 
@@ -37,6 +39,8 @@ public class FaqDto {
         private Long id;
         private String title;
         private String content;
+        private Long userId;
+        private String userUsername;
     }
 
 }

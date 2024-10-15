@@ -27,7 +27,8 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("id password not matched");
         }
         UserDto.LoginResDto res = new UserDto.LoginResDto();
-        res.setResult(true);
+        //res.setResult(true); 지금 bool이었지만, Long으로 이제 받으려 함
+        res.setId(user.getId());
         return res;
     }
     @Override
