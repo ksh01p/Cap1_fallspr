@@ -18,6 +18,7 @@ public class FaqServiceImpl implements FaqService {
     private final UserRepository userRepository;
     public FaqServiceImpl(
             FaqRepository faqRepository
+
             , UserRepository userRepository
 
     ) {
@@ -78,6 +79,7 @@ public class FaqServiceImpl implements FaqService {
 
     @Override
     public FaqDto.DetailResDto detail(Long id) {
+
         Faq faq = faqRepository.findById(id).orElseThrow(() -> new RuntimeException(""));
         return entityToDto(faq);
     }
