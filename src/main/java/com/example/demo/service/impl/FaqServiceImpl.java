@@ -5,24 +5,25 @@ import com.example.demo.dto.FaqDto;
 import com.example.demo.repository.FaqRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.FaqService;
+import com.example.demo.mapper.FaqMapper;
+
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class FaqServiceImpl implements FaqService {
 
     private final FaqRepository faqRepository;
+    private final FaqMapper faqMapper;
     private final UserRepository userRepository;
     public FaqServiceImpl(
             FaqRepository faqRepository
-
+            , FaqMapper faqMapper
             , UserRepository userRepository
-
     ) {
         this.faqRepository = faqRepository;
+        this.faqMapper = faqMapper;
         this.userRepository = userRepository;
     }
 
@@ -31,10 +32,6 @@ public class FaqServiceImpl implements FaqService {
     @Override
     public FaqDto.CreateResDto create(FaqDto.CreateReqDto param) {
         System.out.println("create");
-        /*Notice notice = param.toEntity();
-        notice = noticeRepository.save(notice);
-        NoticeDto.CreateResDto resDto = notice.toCreateResDto();
-        return resDto;*/
         return faqRepository.save(param.toEntity()).toCreateResDto();
     }
     @Override
@@ -53,8 +50,8 @@ public class FaqServiceImpl implements FaqService {
     public void delete(Long id) {
         Faq faq = faqRepository.findById(id).orElseThrow(() -> new RuntimeException(""));
         faqRepository.delete(faq);
-
     }
+/*
 
     public FaqDto.DetailResDto entityToDto(Faq faq){
         //돌려줄 디티오에 정보를 담아보겠습니다. (실제로는 Mapper를 사용할 것이라, 이렇게는 잘 안씀)
@@ -62,37 +59,35 @@ public class FaqServiceImpl implements FaqService {
         res.setId(faq.getId());
         res.setTitle(faq.getTitle());
         res.setContent(faq.getContent());
-        res.setUserId(faq.getUserId());
-
+        //사용자 id 값을 가져올수 있다니!!!
         Long userId = faq.getUserId();
+        res.setUserId(userId);
         try{
-            User user = userRepository.findById(userId).orElseThrow(()-> new RuntimeException(""));
+            User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException(""));
             res.setUserUsername(user.getUsername());
-
-        }catch (Exception e){
-
+        } catch(Exception e){
         }
-
-
         return res;
     }
+*/
 
     @Override
     public FaqDto.DetailResDto detail(Long id) {
-
+        return faqMapper.detail(id);
+        /*
         Faq faq = faqRepository.findById(id).orElseThrow(() -> new RuntimeException(""));
         return entityToDto(faq);
+        */
     }
-
-
     @Override
-    public List<FaqDto.DetailResDto> list() {
-        List<FaqDto.DetailResDto> list = new ArrayList<FaqDto.DetailResDto>();
+    public List<FaqDto.DetailResDto> list(FaqDto.ListReqDto param) {
+        return faqMapper.list(param);
+        /*List<FaqDto.DetailResDto> list = new ArrayList<FaqDto.DetailResDto>();
         List<Faq> faqList = faqRepository.findAll();
         for(Faq faq : faqList) {
-            list.add(entityToDto(faq));
+            //list.add(entityToDto(faq));
         }
-        return list;
+        return list;*/
     }
 
 

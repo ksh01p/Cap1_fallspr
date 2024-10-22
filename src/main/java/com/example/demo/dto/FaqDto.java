@@ -6,6 +6,7 @@ import lombok.Setter;
 
 public class FaqDto {
 
+    @Builder
     @Setter
     @Getter
     public static class CreateReqDto {
@@ -14,8 +15,7 @@ public class FaqDto {
         private Long userId;
 
         public Faq toEntity(){
-
-            return Faq.of(getUserId(),getTitle(), getContent());
+            return Faq.of(getUserId(), getTitle(), getContent());
         }
     }
     @Setter
@@ -25,11 +25,11 @@ public class FaqDto {
         private String title;
         private String content;
     }
+
     @Builder
     @Setter
     @Getter
     public static class CreateResDto {
-//        private Long userId;
         private Long id;
     }
 
@@ -37,10 +37,16 @@ public class FaqDto {
     @Getter
     public static class DetailResDto {
         private Long id;
+        private Long userId;
         private String title;
         private String content;
-        private Long userId;
         private String userUsername;
+    }
+
+    @Setter
+    @Getter
+    public static class ListReqDto {
+        private String title;
     }
 
 }
