@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.DefaultDto;
 import com.example.demo.dto.FaqDto;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +11,12 @@ import java.util.Map;
 @Service
 public interface FaqService {
     /**/
-    FaqDto.CreateResDto create(FaqDto.CreateReqDto param);
+    DefaultDto.CreateResDto create(FaqDto.CreateReqDto param);
     void update(FaqDto.UpdateReqDto param);
     void delete(Long id);
-    List<FaqDto.DetailResDto> list(FaqDto.ListReqDto param);
     FaqDto.DetailResDto detail(Long id);
+    List<FaqDto.DetailResDto> list(FaqDto.ListReqDto param);
+    DefaultDto.PagedListResDto pagedlist(FaqDto.PagedListReqDto param);
+
 }
 

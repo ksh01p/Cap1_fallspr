@@ -1,45 +1,23 @@
 package com.example.demo.dto;
 
 
-import com.example.demo.domain.Notice;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-public class NoticeDto {
+
+import java.time.LocalDateTime;
+
+public class DefaultDto {
 
     @AllArgsConstructor
     @NoArgsConstructor
     @SuperBuilder
     @Setter
     @Getter
-    public static class CreateReqDto extends DefaultDto.CreateReqDto {
-        private String title;
-        private String content;
-
-        public Notice toEntity(){
-            Notice notice = new Notice();
-            notice.setDeleted(false);
-            notice.setTitle(title);
-            notice.setContent(content);
-            return notice;
-        }
-    }
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @SuperBuilder
-    @Setter
-    @Getter
-    public static class UpdateReqDto extends DefaultDto.UpdateReqDto {
-        private String title;
-        private String content;
-    }
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Setter
-    @Getter
-    public static class DetailResDto extends DefaultDto.DetailResDto {
-        private String title;
-        private String content;
+    public static class CreateReqDto {
+        private Boolean deleted;
     }
 
     @AllArgsConstructor
@@ -47,9 +25,42 @@ public class NoticeDto {
     @SuperBuilder
     @Setter
     @Getter
-    public static class ListReqDto extends DefaultDto.ListReqDto {
-        private String title;
+    public static class UpdateReqDto {
+        private Long id;
+        private Boolean deleted;
     }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @SuperBuilder
+    @Setter
+    @Getter
+    public static class CreateResDto {
+        private Long id;
+    }
+
+    //여기는 빌더 사용 금지!!
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Setter
+    @Getter
+    public static class DetailResDto {
+        private Long id;
+        private Boolean deleted;
+        private LocalDateTime createdAt;
+        private String createdAtDateTime;
+        private LocalDateTime modifiedAt;
+    }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @SuperBuilder
+    @Setter
+    @Getter
+    public static class ListReqDto {
+        private Boolean deleted;
+    }
+
     @AllArgsConstructor
     @NoArgsConstructor
     @SuperBuilder
@@ -58,12 +69,16 @@ public class NoticeDto {
     public static class PagedListReqDto {
         private Boolean deleted;
         private String title;
+        private String orderby;//정렬 기준
+        private String orderway;//정렬 방향
         private int callpage;
-        //private int nowpage;
+//        private int nowpage;
+
 
         private Integer perpage; //한페이지에 몇개 보여줄지
         private Integer offset; //몇번째 정보부터 보여줄지
     }
+
     @AllArgsConstructor
     @NoArgsConstructor
     @SuperBuilder
@@ -71,7 +86,7 @@ public class NoticeDto {
     @Getter
     public static class PagedListResDto {
         private int countList;
-        private int callpage;
+        private int callpage;//요청페이지
         private int countPage;
         private Object list;
     }

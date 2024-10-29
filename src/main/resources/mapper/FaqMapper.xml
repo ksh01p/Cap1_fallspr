@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.FaqMapper">
-
     <!---->
     <select id="detail" parameterType="hashMap" resultType="com.example.demo.dto.FaqDto$DetailResDto">
         SELECT faq.id
@@ -25,7 +24,31 @@
                  LEFT JOIN user
                            ON faq.user_id = user.id
         WHERE faq.id is not NULL
+        <if test = "title != null and title !=''">AND faq.deleted = #{deleted}</if>
+
         <if test = "title != null and title !=''">AND faq.title = #{title}</if>
+
+
+    </select>
+
+    <select id="pagedlist" parameterType="hashMap" resultType="com.example.demo.dto.FaqDto$DetailResDto">
+        SELECT faq.id
+        FROM faq
+        WHERE faq.id is not NULL
+        <if test = "title != null and title !=''">AND faq.title LIKE CONCAT('%',#{title},'%')</if>
+        <if test = "orderby != null and orderby =='createdAt'">ORDER BY faq.created_at</if>
+        <if test = "orderby != null and orderby =='createdAt'">ORDER BY faq.title</if>
+        <if test = "orderway != null and orderway =='desc'">DESC</if>
+        <if test = "orderway != null and orderway =='asc'">ASC</if>
+        LIMIT #{offset},#{perpage}
+    </select>
+
+    <select id="pagedlistCount" parameterType="hashMap" resultType="Integer">
+        SELECT count(faq.id) as listSize
+        FROM faq
+        WHERE faq.id is not NULL
+        <if test = "deleted != null and deleted !=''">AND faq.deleted = #{deleted}</if>
+        <if test = "title != null and title !=''">AND notice.title = #{title}</if>
 
 
     </select>

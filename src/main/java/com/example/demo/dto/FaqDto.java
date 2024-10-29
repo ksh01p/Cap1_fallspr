@@ -1,52 +1,69 @@
 package com.example.demo.dto;
 import com.example.demo.domain.Faq;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 public class FaqDto {
 
-    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @SuperBuilder
     @Setter
     @Getter
-    public static class CreateReqDto {
+    public static class CreateReqDto extends DefaultDto.CreateReqDto {
+        private Long userId;
         private String title;
         private String content;
-        private Long userId;
 
         public Faq toEntity(){
             return Faq.of(getUserId(), getTitle(), getContent());
         }
     }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @SuperBuilder
     @Setter
     @Getter
-    public static class UpdateReqDto {
+    public static class UpdateReqDto extends DefaultDto.UpdateReqDto {
         private Long id;
         private String title;
         private String content;
     }
 
-    @Builder
-    @Setter
-    @Getter
-    public static class CreateResDto {
-        private Long id;
-    }
 
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Setter
     @Getter
-    public static class DetailResDto {
-        private Long id;
+    public static class DetailResDto extends DefaultDto.DetailResDto {
         private Long userId;
         private String title;
         private String content;
         private String userUsername;
     }
 
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @SuperBuilder
     @Setter
     @Getter
-    public static class ListReqDto {
+    public static class ListReqDto extends DefaultDto.ListReqDto {
         private String title;
     }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @SuperBuilder
+    @Setter
+    @Getter
+    public static class PagedListReqDto extends DefaultDto.PagedListReqDto {
+        private Boolean deleted;
+        private String title;
+
+        private Integer perpage; //한페이지에 몇개 보여줄지
+        private Integer offset; //몇번째 정보부터 보여줄지
+    }
+
 
 }

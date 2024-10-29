@@ -1,4 +1,5 @@
 package com.example.demo.domain;
+import com.example.demo.dto.DefaultDto;
 import com.example.demo.dto.FaqDto;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,9 +9,8 @@ import lombok.Setter;
 @Entity
 
 
-public class Faq {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id Long id;
+public class Faq extends AuditingFields{
+
 
     @Setter
     Long userId;//foreign key
@@ -23,19 +23,19 @@ public class Faq {
 
 
     protected Faq(){
-
     }
-    private Faq(Long userId,String title, String content){
+    private Faq(Boolean deleted,Long userId, String title, String content){
+        this.deleted = deleted;
         this.userId = userId;
         this.title=title;
         this.content=content;
     }
     //생성자는 그냥 안쓰고 싶음..of 라는 메서드를 통해서만 엑세스 인스턴스를 보내기로 함.
     public static Faq of(Long userId,String title, String content){
-        return new Faq(userId,title,content);
+        return new Faq(false,userId,title,content);
     }
 
-    public FaqDto.CreateResDto toCreateResDto() {
-        return FaqDto.CreateResDto.builder().id(id).build();
+    public DefaultDto.CreateResDto toCreateResDto() {
+        return DefaultDto.CreateResDto.builder().id(getId()).build();
     }
 }
