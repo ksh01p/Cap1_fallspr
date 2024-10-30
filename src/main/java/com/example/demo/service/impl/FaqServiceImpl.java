@@ -83,9 +83,10 @@ public class FaqServiceImpl implements FaqService {
     }
 
     @Override
-    public DefaultDto.PagedListResDto pagedlist(FaqDto.PagedListReqDto param) {
-        int countList = faqMapper.pagedListCount(param);
-        return null;
+    public DefaultDto.PagedListResDto pagedList(FaqDto.PagedListReqDto param){
+        DefaultDto.PagedListResDto retrunVal = DefaultDto.PagedListResDto.init(param, faqMapper.pagedListCount(param));
+        retrunVal.setList(detaillist(faqMapper.pagedList(param)));
+        return retrunVal;
     }
 
 

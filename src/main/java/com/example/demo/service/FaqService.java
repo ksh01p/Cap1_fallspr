@@ -9,14 +9,20 @@ import java.util.Map;
 
 
 @Service
+
 public interface FaqService {
     /**/
     DefaultDto.CreateResDto create(FaqDto.CreateReqDto param);
+
     void update(FaqDto.UpdateReqDto param);
+
     void delete(Long id);
+
     FaqDto.DetailResDto detail(Long id);
+
     List<FaqDto.DetailResDto> list(FaqDto.ListReqDto param);
-    DefaultDto.PagedListResDto pagedlist(FaqDto.PagedListReqDto param);
+
+    DefaultDto.PagedListResDto pagedList(FaqDto.PagedListReqDto param);
 
 }
 
