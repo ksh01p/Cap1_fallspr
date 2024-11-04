@@ -64,6 +64,16 @@ public class FaqDto {
         private Integer perpage; //한페이지에 몇개 보여줄지
         private Integer offset; //몇번째 정보부터 보여줄지
     }
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Setter
+    @Getter
+
+    public static class ScrollListReqDto extends DefaultDto.ScrollListReqDto {
+        private String title;
+    }
+
+
 
 
 }

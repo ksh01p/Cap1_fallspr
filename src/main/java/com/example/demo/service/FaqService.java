@@ -24,5 +24,8 @@ public interface FaqService {
 
     DefaultDto.PagedListResDto pagedList(FaqDto.PagedListReqDto param);
 
+    List<FaqDto.DetailResDto> scrollList(FaqDto.ScrollListReqDto param);
+
+
 }
 

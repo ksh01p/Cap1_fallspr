@@ -111,5 +111,32 @@ public class DefaultDto {
                     .build();
         }
     }
+    @Setter
+    @Getter
+    public static class ScrollListReqDto {
+        private String orderway; //정렬 방향
+        private Integer perpage; //한페이지에 몇개 보여줄지
+        private Long cursor; // 기준이 되는 정보를 가지고 있는 id 값
+        private String createdAt;// 시간값을 정해주려고 합니다!
+
+        private Boolean deleted;
+
+        public void init(){
+            Integer perpage = getPerpage();
+            if(perpage == null){
+                setPerpage(10);
+            } else {
+                if(perpage < 0){
+                    setPerpage(10);
+                }
+            }
+            //정렬 방향
+            String orderway = getOrderway();
+            if(orderway == null || orderway.isEmpty()){
+                orderway = "desc";
+            }
+            setOrderway(orderway);
+        }
+    }
 
 }
