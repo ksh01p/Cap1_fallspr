@@ -69,6 +69,8 @@ public class DefaultDto {
 
         private Integer perpage; //한페이지에 몇개 보여줄지
         private Integer offset; //몇번째 정보부터 보여줄지
+
+        private Boolean deleted;
     }
     @AllArgsConstructor @NoArgsConstructor @SuperBuilder @Setter @Getter
     public static class PagedListResDto {
@@ -79,7 +81,17 @@ public class DefaultDto {
 
         public static PagedListResDto init(PagedListReqDto param, int itemcount){
             //offset 을 구하기 위함!!
-            int perpage = param.getPerpage();
+            Integer perpage = param.getPerpage();
+            if(perpage == null){
+                param.setPerpage(10);
+                perpage = param.getPerpage();
+            } else {
+                if(perpage < 0){
+                    param.setPerpage(10);
+                    perpage = param.getPerpage();
+                }
+            }
+
             int pagecount = itemcount / perpage;
             if(itemcount % perpage > 0){
                 pagecount++;
@@ -88,6 +100,7 @@ public class DefaultDto {
             if(callpage < 1){ callpage = 1; }
             if(callpage > pagecount){ callpage = pagecount; }
             int offset = (callpage - 1) * perpage;
+            if(offset < 0){ offset = 0; }
             param.setOffset(offset);
 
             //정렬 기준
@@ -111,6 +124,10 @@ public class DefaultDto {
                     .build();
         }
     }
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @SuperBuilder
     @Setter
     @Getter
     public static class ScrollListReqDto {
@@ -138,5 +155,4 @@ public class DefaultDto {
             setOrderway(orderway);
         }
     }
-
 }

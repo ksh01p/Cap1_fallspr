@@ -5,13 +5,10 @@ import lombok.experimental.SuperBuilder;
 
 public class FaqDto {
 
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @SuperBuilder
-    @Setter
-    @Getter
+    @AllArgsConstructor @NoArgsConstructor @SuperBuilder @Setter @Getter
     public static class CreateReqDto extends DefaultDto.CreateReqDto {
         private Long userId;
+
         private String title;
         private String content;
 
@@ -19,23 +16,13 @@ public class FaqDto {
             return Faq.of(getUserId(), getTitle(), getContent());
         }
     }
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @SuperBuilder
-    @Setter
-    @Getter
+    @AllArgsConstructor @NoArgsConstructor @SuperBuilder @Setter @Getter
     public static class UpdateReqDto extends DefaultDto.UpdateReqDto {
-        private Long id;
         private String title;
         private String content;
     }
 
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Setter
-    @Getter
+    @AllArgsConstructor @NoArgsConstructor @Setter @Getter
     public static class DetailResDto extends DefaultDto.DetailResDto {
         private Long userId;
         private String title;
@@ -43,37 +30,18 @@ public class FaqDto {
         private String userUsername;
     }
 
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @SuperBuilder
-    @Setter
-    @Getter
+    @AllArgsConstructor @NoArgsConstructor @SuperBuilder @Setter @Getter
     public static class ListReqDto extends DefaultDto.ListReqDto {
         private String title;
     }
 
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @SuperBuilder
-    @Setter
-    @Getter
+    @AllArgsConstructor @NoArgsConstructor @SuperBuilder @Setter @Getter
     public static class PagedListReqDto extends DefaultDto.PagedListReqDto {
-        private Boolean deleted;
         private String title;
-
-        private Integer perpage; //한페이지에 몇개 보여줄지
-        private Integer offset; //몇번째 정보부터 보여줄지
     }
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Setter
-    @Getter
-
+    @AllArgsConstructor @NoArgsConstructor @SuperBuilder @Setter @Getter
     public static class ScrollListReqDto extends DefaultDto.ScrollListReqDto {
         private String title;
     }
-
-
-
 
 }

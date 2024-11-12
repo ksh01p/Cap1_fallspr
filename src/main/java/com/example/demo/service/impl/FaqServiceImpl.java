@@ -57,48 +57,37 @@ public class FaqServiceImpl implements FaqService {
     public FaqDto.DetailResDto get(Long id) {
         return faqMapper.detail(id);
     }
-
-    public List<FaqDto.DetailResDto> detaillist(List<FaqDto.DetailResDto> list) {
+    public List<FaqDto.DetailResDto> detailList(List<FaqDto.DetailResDto> list) {
         List<FaqDto.DetailResDto> newList = new ArrayList<>();
-        for(FaqDto.DetailResDto each : list){
+        for(FaqDto.DetailResDto each : list) {
             newList.add(get(each.getId()));
         }
         return newList;
     }
-
     @Override
     public FaqDto.DetailResDto detail(Long id) {
         return get(id);
-
     }
     @Override
     public List<FaqDto.DetailResDto> list(FaqDto.ListReqDto param) {
-        return faqMapper.list(param);
-        /*List<FaqDto.DetailResDto> list = new ArrayList<FaqDto.DetailResDto>();
-        List<Faq> faqList = faqRepository.findAll();
-        for(Faq faq : faqList) {
-            //list.add(entityToDto(faq));
-        }
-        return list;*/
+        return detailList(faqMapper.list(param));
     }
 
     @Override
     public DefaultDto.PagedListResDto pagedList(FaqDto.PagedListReqDto param){
         DefaultDto.PagedListResDto retrunVal = DefaultDto.PagedListResDto.init(param, faqMapper.pagedListCount(param));
-        retrunVal.setList(detaillist(faqMapper.pagedList(param)));
+        retrunVal.setList(detailList(faqMapper.pagedList(param)));
         return retrunVal;
     }
-
+    @Override
     public List<FaqDto.DetailResDto> scrollList(FaqDto.ScrollListReqDto param){
         param.init();
-        Long curser = param.getCursor();
-        if(curser!= null){
-            Faq faq = faqRepository.findById(curser).orElseThrow(()->new RuntimeException(""));
-            param.setCreatedAt(faq.getCreatedAt()+"");
-
+        Long cursor = param.getCursor();
+        if(cursor != null){
+            Faq faq = faqRepository.findById(cursor).orElseThrow(() -> new RuntimeException(""));
+            param.setCreatedAt(faq.getCreatedAt() + "");
         }
-
-        return detaillist(faqMapper.scrollList(param));
+        return detailList(faqMapper.scrollList(param));
     }
 
 }

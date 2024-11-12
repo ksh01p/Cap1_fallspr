@@ -23,7 +23,6 @@ public class DefaultController {
         return "test";
     }
 
-
     @ResponseBody
     @GetMapping(value = "/image/{file_name:.+}")
     public byte[] getImage(@PathVariable("file_name") String file_name) {
@@ -67,6 +66,7 @@ public class DefaultController {
         InputStream inputStream = new BufferedInputStream(new FileInputStream(file));	//--- inputstream 객체를 얻습니다.
         FileCopyUtils.copy(inputStream, response.getOutputStream());		//--- inputstream으로 파일을 읽고 outputsream으로 파일을 씁니다.
     }
+
 }
 
 /*
