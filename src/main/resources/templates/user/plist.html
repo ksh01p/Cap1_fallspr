@@ -1,5 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+  /* 전체 폰트 및 레이아웃 설정 */
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  /* 제목 스타일 */
+  h1, h2, h3 {
+    text-align: center;
+    color: #555;
+  }
+
+  /* 입력 필드 및 셀렉트 박스 스타일 */
+  input[type="number"],
+  input[type="text"],
+  select {
+    padding: 8px 12px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 24px); /* 반응형 */
+    max-width: 300px;
+  }
+
+  /* 읽기 전용 입력 필드 */
+  input[readonly] {
+    background-color: #e9ecef;
+    border-color: #ddd;
+  }
+
+  /* 버튼 스타일 */
+  button, a {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+
+  button:hover, a:hover {
+    background-color: #0056b3;
+  }
+
+  /* 게시판 컨테이너 */
+  #div_list {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 게시글 항목 */
+  #div_list a {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  #div_list a:hover {
+    background-color: #e2e6ea;
+  }
+
+  /* 페이지 네비게이션 */
+  #div_page_number {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  #div_page_number a {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #007bff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  #div_page_number a:hover {
+    background-color: #007bff;
+    color: white;
+  }
+
+  #div_page_number a:active {
+    background-color: #0056b3;
+    color: white;
+  }
+
+  /* 반응형 레이아웃 */
+  @media (max-width: 600px) {
+    input[type="number"],
+    input[type="text"],
+    select {
+      width: 100%;
+    }
+
+    #div_list {
+      width: 100%;
+    }
+  }
+
+</style>
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
